@@ -1,0 +1,36 @@
+/* 
+ * AVIS-ARTIFACT
+ * Filename: prime_metrics.json
+ * ROLE: METRICS RESOURCE FILE
+ * ENGINE: AVIS
+ * STATUS: ACTIVE
+ */
+
+{
+  "metrics": {
+    "stability": {
+      "weight": 0.25,
+      "description": "Measures consistency and reliability of agent behavior."
+    },
+    "coherence": {
+      "weight": 0.25,
+      "description": "Evaluates logical flow and structural integrity of outputs."
+    },
+    "efficiency": {
+      "weight": 0.20,
+      "description": "Assesses resource usage and runtime performance."
+    },
+    "novelty": {
+      "weight": 0.20,
+      "description": "Captures originality and innovation in agent synthesis."
+    },
+    "conflict": {
+      "weight": -0.10,
+      "description": "Penalizes contradictions and instability in agent branches."
+    }
+  },
+  "thresholds": {
+    "approval": 70.0,
+    "rejection": 50.0
+  }
+}

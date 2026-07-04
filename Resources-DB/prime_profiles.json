@@ -1,0 +1,45 @@
+/* 
+ * AVIS-ARTIFACT
+ * Filename: prime_profiles.json
+ * ROLE: PROFILES RESOURCE FILE
+ * ENGINE: AVIS
+ * STATUS: ACTIVE
+ */
+
+{
+  "profiles": [
+    {
+      "name": "InitializeKernel",
+      "traits": {
+        "stability": 0.80,
+        "coherence": 0.85,
+        "efficiency": 0.70,
+        "novelty": 0.60,
+        "conflict": 0.10
+      },
+      "description": "Profile for kernel initialization tasks."
+    },
+    {
+      "name": "OptimizeKernel",
+      "traits": {
+        "stability": 0.90,
+        "coherence": 0.88,
+        "efficiency": 0.85,
+        "novelty": 0.75,
+        "conflict": 0.20
+      },
+      "description": "Profile for kernel optimization tasks."
+    },
+    {
+      "name": "ShutdownKernel",
+      "traits": {
+        "stability": 0.70,
+        "coherence": 0.80,
+        "efficiency": 0.65,
+        "novelty": 0.55,
+        "conflict": 0.05
+      },
+      "description": "Profile for kernel shutdown tasks."
+    }
+  ]
+}

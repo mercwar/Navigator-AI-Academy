@@ -1,0 +1,35 @@
+# AVIS-ARTIFACT
+Filename: llm.txt
+ROLE: LLM CONFIGURATION
+ENGINE: AVIS
+STATUS: ACTIVE
+
+============================================================
+Prime Agent LLM Configuration
+============================================================
+
+Model Bindings:
+- Engine: AVIS
+- Runtime Mode: Interactive
+- Memory: Enabled
+- Arbitration: Consensus Scoring
+- Execution: Deterministic with fallback stochastic sampling
+
+Parameters:
+- Max Tokens: 8192
+- Temperature: 0.7
+- Top-K: 50
+- Top-P: 0.95
+- Beam Width: 4
+- Penalty: Frequency 0.8, Presence 0.6
+
+Runtime Flags:
+- Enable Kernel ASM integration
+- Allow Scoring C arbitration
+- Route Evaluation Java outputs
+- Accept Synthesis PHP decisions
+- Deploy Application layer hooks
+
+Notes:
+This file defines the **LLM runtime environment** for the Prime Agent.  
+It ensures consistent arbitration across modules and enforces AVIS compliance.

@@ -1,0 +1,37 @@
+/* 
+ * AVIS-ARTIFACT
+ * Filename: prime_rules.json
+ * ROLE: RULES RESOURCE FILE
+ * ENGINE: AVIS
+ * STATUS: ACTIVE
+ */
+
+{
+  "rules": [
+    {
+      "id": "RULE-001",
+      "title": "Consensus Enforcement",
+      "description": "All arbitration decisions must reflect majority consensus among branches."
+    },
+    {
+      "id": "RULE-002",
+      "title": "Conflict Minimization",
+      "description": "Branches with high conflict scores are deprioritized in synthesis."
+    },
+    {
+      "id": "RULE-003",
+      "title": "Threshold Compliance",
+      "description": "Approval requires a minimum score of 70.0; rejection below 50.0."
+    },
+    {
+      "id": "RULE-004",
+      "title": "Transparency Logging",
+      "description": "All arbitration and synthesis decisions must be logged for audit."
+    },
+    {
+      "id": "RULE-005",
+      "title": "Security Validation",
+      "description": "All inputs and outputs must be validated against AVIS security policies."
+    }
+  ]
+}

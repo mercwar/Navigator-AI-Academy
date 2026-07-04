@@ -1,0 +1,48 @@
+/* 
+ * AVIS-ARTIFACT
+ * Filename: prime_dependencies.json
+ * ROLE: DEPENDENCIES RESOURCE FILE
+ * ENGINE: AVIS
+ * STATUS: ACTIVE
+ */
+
+{
+  "dependencies": {
+    "java": [
+      "PrimeMatrix.java",
+      "PrimeSymbolicCompiler.java"
+    ],
+    "php": [
+      "prime_selector.php",
+      "prime_arbitration.php",
+      "prime_synthesis.php",
+      "prime_patterns.php",
+      "prime_personality.php"
+    ],
+    "c": [
+      "prime_agent.c",
+      "prime_core.c",
+      "prime_tests.c"
+    ],
+    "json": [
+      "prime_metrics.json",
+      "prime_profiles.json",
+      "prime_governance.json",
+      "prime_rules.json",
+      "prime_dependencies.json"
+    ],
+    "docs": [
+      "prime_readme.md",
+      "prime_architecture.md",
+      "prime_execution.md",
+      "prime_api.md",
+      "prime_security.md",
+      "prime_tutorial.md"
+    ]
+  },
+  "notes": {
+    "integration": "All modules must include AVIS headers and comply with governance rules.",
+    "testing": "Unit tests in C validate scoring and arbitration logic.",
+    "logging": "PHP synthesis scripts must log arbitration and synthesis decisions."
+  }
+}
