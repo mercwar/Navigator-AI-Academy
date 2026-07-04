@@ -108,6 +108,7 @@ html, body {
 /* Main content */
 #mainContent {
   flex: 1;
+
   padding: 25px;
   background: rgba(15, 15, 15, 0.0); /* transparent container */
   overflow-y: auto;
@@ -115,6 +116,7 @@ html, body {
 
 /* Rich text viewer */
 .source-view {
+	position:relative;
   background: rgba(0,0,0,0.85); /* solid fill behind text */
   border: 1px solid rgba(255,255,255,0.1);
   padding: 20px;
@@ -164,4 +166,23 @@ html, body {
 .source-view::-webkit-scrollbar-thumb:horizontal {
   background: linear-gradient(90deg, #ffd700, #00f7ff, #ff4500);
   border-radius: 5px;
+}
+#content-bnr {
+  position: relative;
+top:1px;
+  left: 1px;
+
+  /* Full width minus sidebar width */
+  width: calc(100vw - 330px);
+
+  /* Full height minus any header/footer if needed */
+  height: 36%;
+
+  background-image: url("new-wav.png?v=1");
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: contain;   /* shrink to fit without cutting off */
+
+  overflow: hidden;
+  box-sizing: border-box;
 }
