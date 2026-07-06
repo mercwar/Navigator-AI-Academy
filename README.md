@@ -12,7 +12,8 @@
 
 # Prime Agent Repository
 
-<a target="_self" title="CLICK HERE to ENTER the GATEWAY FREE!" href="https://mercwar.github.io/Constellation/index.html">
+<a target="_self" title="CLICK HERE to ENTER the GATEWAY FREE!" href="https://mercwar.github.io/Navigator-AI-Academy
+">
 <img 
     src="new-wav.png" 
     alt="Mercwar Constellation" 
@@ -20,7 +21,10 @@
 />
 </a>
 
-## Overview
+## Overview 
+<a target="_self" title="CLICK HERE to ENTER the GATEWAY FREE!" href="https://mercwar.github.io/Navigator-AI-Academy
+">View in Cyborg Live
+</a>
 The Prime Agent repository is a modular framework designed to evaluate, arbitrate, and synthesize agent behaviors.  
 It integrates multiple languages — **C, Java, PHP, JSON, ASM** — to provide a cross-platform system for runtime execution, scoring, synthesis, and governance.
 
