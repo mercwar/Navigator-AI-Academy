@@ -1,39 +1,43 @@
-<a target="_self" title="CLICK HERE to ENTER the GATEWAY FREE!" href="https://mercwar.github.io/Constellation/index.html">
-<img 
-    src="https://raw.githubusercontent.com/mercwar/Robo-Knight-Gallery/refs/heads/main/Version%207/image_d2a07390.png" 
-    alt="Mercwar Constellation" 
-    style="width:100%; height:auto;"
-/>
-</a>
-
-
-
-
-
-# Prime Agent Repository
-
-<a target="_self" title="CLICK HERE to ENTER the GATEWAY FREE!" href="https://mercwar.github.io/Navigator-AI-Academy
-">
-<img 
-    src="new-wav.png" 
-    alt="Mercwar Constellation" 
-    style="width:100%; height:auto;"
-/>
-</a>
-
-## Overview 
-<a target="_self" title="CLICK HERE to ENTER the GATEWAY FREE!" href="https://mercwar.github.io/Navigator-AI-Academy
-">View in Cyborg Live
-</a>
-The Prime Agent repository is a modular framework designed to evaluate, arbitrate, and synthesize agent behaviors.  
-It integrates multiple languages — **C, Java, PHP, JSON, ASM** — to provide a cross-platform system for runtime execution, scoring, synthesis, and governance.
+# 🌌 Prime Agent Repository
 
 ---
 
-## Repository Structure
+## ✨ Gateway Access
 
-### Core Agent Control
-Contains configuration and control files for the agent runtime:
+<a target="_self" title="CLICK HERE to ENTER the GATEWAY FREE!" href="https://mercwar.github.io/Constellation/index.html">
+  <img 
+    src="https://raw.githubusercontent.com/mercwar/Robo-Knight-Gallery/refs/heads/main/Version%207/image_d2a07390.png" 
+    alt="Mercwar Constellation" 
+    style="width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.3);"
+  />
+</a>
+
+---
+
+## 🎓 Navigator AI Academy
+
+<a target="_self" title="CLICK HERE to ENTER the GATEWAY FREE!" href="https://mercwar.github.io/Navigator-AI-Academy">
+  <img 
+    src="new-wav.png" 
+    alt="Navigator AI Academy" 
+    style="width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.3);"
+  />
+</a>
+
+#### Browse the Academy [HERE](https://mercwar.github.io/Navigator-AI-Academy)
+
+---
+
+## 📖 Overview
+
+- The **Prime Agent Repository** is a modular framework designed to evaluate, arbitrate, and synthesize agent behaviors.  
+- It integrates multiple languages — **C, Java, PHP, JSON, ASM** — to provide a cross-platform system for runtime execution, scoring, synthesis, and governance.
+
+---
+
+## 🗂 Repository Structure
+
+### 🔧 Core Agent Control
 - `agent.md` — Agent overview  
 - `llm.txt` — Language model notes  
 - `AGENTS.md` — Agent definitions  
@@ -41,16 +45,14 @@ Contains configuration and control files for the agent runtime:
 - `CONFIG.md` — Configuration details  
 - `VERSION.md` — Version history  
 
-### Kernel Runtime ASM
-Low-level assembly modules for kernel and runtime operations:
+### ⚙️ Kernel Runtime ASM
 - `prime_kernel.asm`  
 - `prime_loop.asm`  
 - `prime_state.asm`  
 - `prime_runtime.asm`  
 - `prime_debug.asm`  
 
-### Scoring (C)
-Implements metric scoring logic:
+### 📊 Scoring (C)
 - `prime_scoring.c`  
 - `prime_stability.c`  
 - `prime_coherence.c`  
@@ -59,40 +61,35 @@ Implements metric scoring logic:
 - `prime_conflict.c`  
 - `prime_consensus.c`  
 
-### Evaluation (Java)
-Java modules for evaluation and symbolic compilation:
+### 🧮 Evaluation (Java)
 - `Prime_BranchEvaluator.java`  
 - `Prime_RankingEngine.java`  
 - `Prime_Comparator.java`  
 - `Prime_Matrix.java`  
 - `Prime_SymbolicCompiler.java`  
 
-### Synthesis (PHP)
-PHP modules for branch selection, arbitration, and synthesis:
+### 🔍 Synthesis (PHP)
 - `prime_selector.php`  
 - `prime_arbitration.php`  
 - `prime_synthesis.php`  
 - `prime_patterns.php`  
 - `prime_personality.php`  
 
-### Application
-Runtime and utility modules:
+### 🚀 Application
 - `prime_agent.c`  
 - `prime_core.c`  
 - `prime_ai.java`  
 - `prime_utils.php`  
 - `prime_tests.c`  
 
-### Resources
-JSON resources defining metrics, profiles, rules, dependencies, and response formats:
+### 📑 Resources
 - `prime_metrics.json`  
 - `prime_profiles.json`  
 - `prime_rules.json`  
 - `prime_dependencies.json`  
 - `prime_ResponseFormat.json`  
 
-### Docs
-Documentation for architecture, execution, API, security, and tutorials:
+### 📚 Docs
 - `prime_readme.md`  
 - `prime_architecture.md`  
 - `prime_execution.md`  
@@ -102,7 +99,8 @@ Documentation for architecture, execution, API, security, and tutorials:
 
 ---
 
-## Workflow
+## 🔄 Workflow
+
 1. **Initialize** — Load profiles, metrics, governance rules, and dependencies.  
 2. **Evaluate** — Apply scoring via Java modules.  
 3. **Select** — Choose best branch with PHP selector.  
@@ -114,7 +112,8 @@ Documentation for architecture, execution, API, security, and tutorials:
 
 ---
 
-## Governance
+## 🛡 Governance
+
 - **Consensus Enforcement** — Majority rules in arbitration.  
 - **Conflict Minimization** — High-conflict branches deprioritized.  
 - **Threshold Compliance** — Approval ≥ 70.0, rejection ≤ 50.0.  
@@ -123,7 +122,8 @@ Documentation for architecture, execution, API, security, and tutorials:
 
 ---
 
-## Getting Started
+## ⚡ Getting Started
+
 ```bash
 # Compile evaluation modules
 javac Evaluation-Java/*.java
