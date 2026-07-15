@@ -5,82 +5,126 @@
 // STATE-MATRIX-REF: Version 1/STATE/global.state
 // ============================================================
 
-const files = [
-  // Core Agent Control
-  { name: "agent.md", source: "./Core-Agent-Control/agent.md", category: "Core Agent Control" },
-  { name: "llm.txt", source: "./Core-Agent-Control/llm.txt", category: "Core Agent Control" },
-  { name: "AGENTS.md", source: "./Core-Agent-Control/AGENTS.md", category: "Core Agent Control" },
-  { name: "NEXT.md", source: "./Core-Agent-Control/NEXT.md", category: "Core Agent Control" },
-  { name: "CONFIG.md", source: "./Core-Agent-Control/CONFIG.md", category: "Core Agent Control" },
-  { name: "VERSION.md", source: "./Core-Agent-Control/VERSION.md", category: "Core Agent Control" },
 
-  // Kernel + Runtime ASM
-  { name: "prime_kernel.asm", source: "./Kernel-Runtime-ASM/prime_kernel.asm", category: "Kernel Runtime" },
-  { name: "prime_loop.asm", source: "./Kernel-Runtime-ASM/prime_loop.asm", category: "Kernel Runtime" },
-  { name: "prime_state.asm", source: "./Kernel-Runtime-ASM/prime_state.asm", category: "Kernel Runtime" },
-  { name: "prime_runtime.asm", source: "./Kernel-Runtime-ASM/prime_runtime.asm", category: "Kernel Runtime" },
-  { name: "prime_debug.asm", source: "./Kernel-Runtime-ASM/prime_debug.asm", category: "Kernel Runtime" },
+// ============================================================
+// FILENAME: index.js
+// AVIS-COMPONENT: MENU-BUILDER
+// ARTIFACT-ID: AV-MENU-2026-JS
+// STATE-MATRIX-REF: Version 1/STATE/global.state
+// ============================================================
 
-  // Scoring C
-  { name: "prime_scoring.c", source: "./Scoring-C/prime_scoring.c", category: "Scoring" },
-  { name: "prime_stability.c", source: "./Scoring-C/prime_stability.c", category: "Scoring" },
-  { name: "prime_coherence.c", source: "./Scoring-C/prime_coherence.c", category: "Scoring" },
-  { name: "prime_efficiency.c", source: "./Scoring-C/prime_efficiency.c", category: "Scoring" },
-  { name: "prime_novelty.c", source: "./Scoring-C/prime_novelty.c", category: "Scoring" },
-  { name: "prime_conflict.c", source: "./Scoring-C/prime_conflict.c", category: "Scoring" },
-  { name: "prime_consensus.c", source: "./Scoring-C/prime_consensus.c", category: "Scoring" },
+const files = [];
 
-  // Evaluation Java
-  { name: "Prime_BranchEvaluator.java", source: "./Evaluation-Java/Prime_BranchEvaluator.java", category: "Evaluation" },
-  { name: "Prime_RankingEngine.java", source: "./Evaluation-Java/Prime_RankingEngine.java", category: "Evaluation" },
-  { name: "Prime_Comparator.java", source: "./Evaluation-Java/Prime_Comparator.java", category: "Evaluation" },
-  { name: "Prime_Matrix.java", source: "./Evaluation-Java/Prime_Matrix.java", category: "Evaluation" },
-  { name: "Prime_SymbolicCompiler.java", source: "./Evaluation-Java/Prime_SymbolicCompiler.java", category: "Evaluation" },
+let conn = {};
+let dirs = {};
 
-  // Synthesis PHP
-  { name: "prime_selector.php", source: "./Synthesis-PHP/prime_selector.php", category: "Synthesis" },
-  { name: "prime_arbitration.php", source: "./Synthesis-PHP/prime_arbitration.php", category: "Synthesis" },
-  { name: "prime_synthesis.php", source: "./Synthesis-PHP/prime_synthesis.php", category: "Synthesis" },
-  { name: "prime_patterns.php", source: "./Synthesis-PHP/prime_patterns.php", category: "Synthesis" },
-  { name: "prime_personality.php", source: "./Synthesis-PHP/prime_personality.php", category: "Synthesis" },
+async function loadconfig() {
+  try {
+    const response = await fetch("config.json");
+    if (!response.ok) {
+      console.error("Failed to load config.json:", response.statusText);
+      return {};
+    }
 
-  // Application
-  { name: "prime_agent.c", source: "./Application/prime_agent.c", category: "Application" },
-  { name: "prime_core.c", source: "./Application/prime_core.c", category: "Application" },
-  { name: "prime_ai.java", source: "./Application/prime_ai.java", category: "Application" },
-  { name: "prime_utils.php", source: "./Application/prime_utils.php", category: "Application" },
-  { name: "prime_tests.c", source: "./Application/prime_tests.c", category: "Application" },
+    const settings = await response.json();
 
-  // Resources 
+    // assign globals
+    conn = settings.conn || {};
+    dirs = settings.dirs || {};
 
-  { name: "prime_metrics.json", source: "./Resources-DB/prime_metrics.json", category: "Resources" },
-  { name: "prime_profiles.json", source: "./Resources-DB/prime_profiles.json", category: "Resources" },
-  { name: "prime_rules.json", source: "./Resources-DB/prime_rules.json", category: "Resources" },
-  { name: "prime_dependencies.json", source: "./Resources-DB/prime_dependencies.json", category: "Resources" },
-  { name: "prime_ResponseFormat.json", source: "./Resources-DB/prime_ResponseFormat.json", category: "Resources" },
-// + Docs
-  { name: "prime_readme.md", source: "./Resources-Docs/prime_readme.md", category: "Docs" },
-  { name: "prime_architecture.md", source: "./Resources-Docs/prime_architecture.md", category: "Docs" },
-  { name: "prime_execution.md", source: "./Resources-Docs/prime_execution.md", category: "Docs" },
-  { name: "prime_api.md", source: "./Resources-Docs/prime_api.md", category: "Docs" },
-  { name: "prime_security.md", source: "./Resources-Docs/prime_security.md", category: "Docs" },
-  { name: "prime_tutorial.md", source: "./Resources-Docs/prime_tutorial.md", category: "Docs" }
-];
+    console.log("Config loaded:", settings);
+
+    // return dirs so startup can assign it
+    return dirs;
+  } catch (err) {
+    console.error("Error loading config.json:", err);
+    return {};
+  }
+}
 
 
-// Build collapsible sidebar menu
+async function do_git(path) {
+  if (!conn.user || !conn.repo || !conn.branch) {
+    console.error("Repo connection not loaded.");
+    return [];
+  }
+
+  const url = `https://api.github.com/repos/${conn.user}/${conn.repo}/contents/${path}?ref=${conn.branch}`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.error("GitHub API error:", response.statusText);
+      return [];
+    }
+
+    const data = await response.json();
+    return Array.isArray(data)
+      ? data.filter(item => item.type === "file").map(item => item.name)
+      : [];
+  } catch (err) {
+    console.error("do_git fetch failed:", err);
+    return [];
+  }
+}
+
+
+
+
+// Fill files array from dirs
+async function FillFiles() {
+  if (!dirs || typeof dirs !== "object") {
+    console.warn("Dirs not loaded, skipping FillFiles.");
+    return;
+  }
+
+  for (const [key, value] of Object.entries(dirs)) {
+    try {
+      const list = await do_git(value);
+      list.forEach(fname => {
+        files.push({ name: fname, source: value, category: key });
+      });
+    } catch (err) {
+      console.error(`Error fetching files for ${key}:`, err);
+    }
+  }
+
+  RenderMenu();
+  buildMenu();
+}
+
+
+// Render flat list of files
+function RenderMenu() {
+  const menu = document.getElementById("md-list");
+  if (!menu) {
+    console.warn("RenderMenu: #md-list not found yet");
+    return;
+  }
+  menu.innerHTML = "";
+  files.forEach(f => {
+    const li = document.createElement("li");
+    li.textContent = `[${f.category}] ${f.name}`;
+    menu.appendChild(li);
+  });
+}
 function buildMenu() {
   const menuContainer = document.getElementById("menuContainer");
+  if (!menuContainer) {
+    console.warn("buildMenu: #menuContainer not found yet");
+    return;
+  }
   menuContainer.innerHTML = "";
 
   // Group files by category
   const grouped = {};
   files.forEach(file => {
-    if (!grouped[file.category]) {
-      grouped[file.category] = [];
-    }
+    if (!grouped[file.category]) grouped[file.category] = [];
     grouped[file.category].push(file);
   });
+
+  // Base URL for GitHub Pages, using repo vars from conn
+  const baseUrl = `https://${conn.user}.github.io/${conn.repo}/`;
 
   // Create collapsible sections
   for (const category in grouped) {
@@ -90,18 +134,22 @@ function buildMenu() {
     const header = document.createElement("div");
     header.className = "menu-header";
     header.textContent = category;
-    header.onclick = () => {
-      content.classList.toggle("collapsed");
-    };
 
     const content = document.createElement("div");
     content.className = "menu-content collapsed";
 
+    header.onclick = () => content.classList.toggle("collapsed");
+
     grouped[category].forEach(file => {
       const link = document.createElement("a");
-      link.href = "#";
+      // Build full GitHub Pages URL
+      const fullPath = `${baseUrl}${file.source}/${file.name}`;
+      link.href = fullPath;
       link.textContent = file.name;
-      link.onclick = () => loadFile("html_obj.html", file.source);
+      link.onclick = e => {
+        e.preventDefault();
+        loadFile("html_obj.html", fullPath);
+      };
       content.appendChild(link);
     });
 
@@ -113,14 +161,7 @@ function buildMenu() {
 
 
 
-// Initialize menu on page load
-document.addEventListener("DOMContentLoaded", buildMenu);
-// ============================================================
-// FILENAME: index.js
-// AVIS-COMPONENT: MENU-BUILDER + PRISM RICH DISPLAY
-// ARTIFACT-ID: AV-JS-2026-MENU
-// STATE-MATRIX-REF: Version 1/STATE/global.state
-// ============================================================
+
 
 let activePath = null;
 let lastFetchedFileContent = null;
@@ -157,32 +198,85 @@ function injectPrismDependencies() {
 
   document.body.appendChild(scriptEl);
 }
-
 function getPrismLanguageClass(path) {
   const lower = path.toLowerCase();
 
+  // Direct render types
+  if (lower.endsWith(".html") || lower.endsWith(".htm") || lower.endsWith(".xml"))
+    return "render-html";
+  if (lower.endsWith(".md") || lower.endsWith(".markdown"))
+    return "render-markdown";
+  if (lower.endsWith(".png") || lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".gif") || lower.endsWith(".svg"))
+    return "render-image";
+
+  // Code highlight types
   if (lower.endsWith(".js") || lower.endsWith(".jsx")) return "language-javascript";
   if (lower.endsWith(".ts") || lower.endsWith(".tsx")) return "language-typescript";
   if (lower.endsWith(".json")) return "language-json";
-  if (lower.endsWith(".md")) return "language-markdown";
   if (lower.endsWith(".py")) return "language-python";
-  if (lower.endsWith(".html") || lower.endsWith(".xml")) return "language-markup";
   if (lower.endsWith(".css")) return "language-css";
   if (lower.endsWith(".sh") || lower.endsWith(".bash")) return "language-bash";
   if (lower.endsWith(".c") || lower.endsWith(".h")) return "language-c";
   if (lower.endsWith(".cpp") || lower.endsWith(".hpp")) return "language-cpp";
-
-  // NEW: Java support
   if (lower.endsWith(".java")) return "language-java";
-
-  // NEW: ASM support (map to clike or custom)
-  if (lower.endsWith(".asm")) return "language-clike"; // Prism doesn’t have native ASM, clike is closest
-
-  // NEW: PHP support
+  if (lower.endsWith(".asm")) return "language-clike";
   if (lower.endsWith(".php")) return "language-php";
 
   return "language-none";
 }
+
+function loadFile(wrapperUrl, sourceUrl) {
+  activePath = sourceUrl;
+  fetch(wrapperUrl)
+    .then(r => r.text())
+    .then(wrapperHtml => {
+      const fc = document.getElementById("fileContent");
+      if (fc) fc.innerHTML = wrapperHtml;
+      return fetch(sourceUrl);
+    })
+    .then(r => r.text())
+    .then(sourceCode => {
+      lastFetchedFileContent = sourceCode;
+      const viewDiv = document.querySelector(".source-view");
+      if (!viewDiv) return;
+
+      const langClass = getPrismLanguageClass(sourceUrl);
+
+      if (langClass === "render-html") {
+        viewDiv.innerHTML = sourceCode; // let browser render HTML
+        return;
+      }
+
+      if (langClass === "render-markdown") {
+        viewDiv.innerHTML = marked.parse(sourceCode); // requires marked.js
+        return;
+      }
+
+      if (langClass === "render-image") {
+        viewDiv.innerHTML = `<img src="${sourceUrl}" alt="${sourceUrl}" style="max-width:100%; height:auto;" />`;
+        return;
+      }
+
+      // Default: Prism highlight
+      const safe = sourceCode
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+      viewDiv.innerHTML = `
+        <pre class="${langClass}" style="margin:0; padding:1rem; background:transparent;">
+          <code class="${langClass}">${safe}</code>
+        </pre>
+      `;
+      Prism.highlightAllUnder(viewDiv);
+    })
+    .catch(err => {
+      const fc = document.getElementById("fileContent");
+      if (fc) fc.innerHTML = "<p style='color:red'>Error loading file.</p>";
+      console.error("loadFile error:", err);
+    });
+}
+
+
 
 function renderPrismCode(rawCode, path) {
   const langClass = getPrismLanguageClass(path);
@@ -198,32 +292,16 @@ function renderPrismCode(rawCode, path) {
   `;
 }
 
-// Override loadFile to use Prism rendering
-function loadFile(wrapperUrl, sourceUrl) {
-  activePath = sourceUrl;
-  fetch(wrapperUrl)
-    .then(response => response.text())
-    .then(wrapperHtml => {
-      document.getElementById("fileContent").innerHTML = wrapperHtml;
-      return fetch(sourceUrl);
-    })
-    .then(response => response.text())
-    .then(sourceCode => {
-      lastFetchedFileContent = sourceCode;
-      const viewDiv = document.querySelector(".source-view");
-      if (viewDiv) {
-        viewDiv.innerHTML = renderPrismCode(sourceCode, sourceUrl);
-        Prism.highlightAllUnder(viewDiv); // apply Prism highlighting
-      }
-    })
-    .catch(err => {
-      document.getElementById("fileContent").innerHTML =
-        "<p style='color:red'>Error loading file.</p>";
-    });
-}
 
-// Initialize
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   injectPrismDependencies();
-  buildMenu();
+  
+  dirs = await loadconfig(); // load from config.json
+
+  if (!document.getElementById("menuContainer")) {
+    console.error("#menuContainer element missing in HTML");
+    return;
+  }
+
+  await FillFiles(); // fetch GitHub files, then render menu
 });

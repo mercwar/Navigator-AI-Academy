@@ -1,0 +1,12 @@
+{
+  "conn": {
+    "user": "mercwar",
+    "repo": "Navigator",
+    "branch": "main"
+  },
+  "dirs": {
+    "HTML": "HTML/",
+    "MD": "MD/"
+    
+  }
+}
